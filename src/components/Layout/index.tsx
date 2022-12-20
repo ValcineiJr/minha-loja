@@ -1,5 +1,8 @@
-import React, { ReactNode, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import React, { ReactNode, useState, useEffect } from 'react';
+
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import {
   FaBars,
@@ -14,6 +17,8 @@ import {
 
 import { Container } from './styles';
 
+import { menuItens } from '@/utils/dummyData';
+
 type LayoutProps = {
   children: ReactNode;
 };
@@ -24,81 +29,12 @@ type SubMenusProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const router = useRouter();
+
   const [toggle, setToggle] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(``);
   const [toggleSubmenu, setToggleSubMenu] = useState(false);
   const [submenus, setSubMenus] = useState<SubMenusProps[]>([]);
-
-  const menuItens = [
-    {
-      label: `Playstation`,
-
-      submenus: [
-        {
-          label: `Playstation 1`,
-          href: ``,
-        },
-        {
-          label: `Playstation 2`,
-          href: ``,
-        },
-        {
-          label: `Playstation 3`,
-          href: ``,
-        },
-      ],
-    },
-    {
-      label: `Xbox`,
-      submenus: [
-        {
-          label: `Xbox`,
-          href: ``,
-        },
-        {
-          label: `Xbox 360`,
-          href: ``,
-        },
-        {
-          label: `Xbox One`,
-          href: ``,
-        },
-      ],
-    },
-    {
-      label: `Nintendo`,
-      submenus: [
-        {
-          label: `Game Boy`,
-          href: ``,
-        },
-        {
-          label: `Game Boy Advance`,
-          href: ``,
-        },
-        {
-          label: `NES`,
-          href: ``,
-        },
-      ],
-    },
-    {
-      label: `Clássicos`,
-      submenus: [
-        {
-          label: `Atari`,
-          href: ``,
-        },
-        {
-          label: `Dreamcast`,
-          href: ``,
-        },
-        {
-          label: `Dynavision`,
-          href: ``,
-        },
-      ],
-    },
-  ];
 
   const toggleMenu = () => {
     setToggle((state) => !state);
@@ -109,6 +45,18 @@ const Layout = ({ children }: LayoutProps) => {
     setToggle(false);
     setToggleSubMenu(false);
   };
+
+  useEffect(() => {
+    if (toggle) {
+      document.body.style.overflow = `hidden`;
+    } else {
+      document.body.style.overflow = `scroll`;
+    }
+  }, [toggle]);
+
+  useEffect(() => {
+    closeMenu();
+  }, [router]);
 
   return (
     <Container toggle={toggle} toggleSubmenu={toggleSubmenu}>
@@ -137,6 +85,7 @@ const Layout = ({ children }: LayoutProps) => {
                   </div>
                 </Link>
               </li>
+
               {menuItens.map((item) => (
                 <li key={item.label}>
                   <span
@@ -153,9 +102,9 @@ const Layout = ({ children }: LayoutProps) => {
               ))}
             </ul>
           </nav>
-          <button className="menu">
+          <Link href={`/carrinho`} className="menu">
             <FaShoppingCart />
-          </button>
+          </Link>
           <div className="sub-menu">
             <button onClick={() => setToggleSubMenu(false)}>
               <FaArrowLeft />
@@ -173,26 +122,41 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
         <div className="row">
           <div className="input">
-            <input type="text" placeholder="Faça sua pesquisa aqui" />
-            <button>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Faça sua pesquisa aqui"
+            />
+            <Link
+              onClick={(e) =>
+                searchTerm === `` ? e.preventDefault() : setSearchTerm(``)
+              }
+              href={`/busca?q=${searchTerm}`}
+              className="search-button"
+            >
               <FaSearch />
-            </button>
+            </Link>
           </div>
         </div>
       </header>
-      {children}
+      <div className="wrapper container">{children}</div>
+
       <footer>
         <div className="wrapper">
           <p>&copy; 2022 Salão de Jogos por Valcinei Junior.</p>
           <div className="social">
             <ul>
               <li>
-                <Link href={`s`}>
+                <Link target="_blank" href={`https://github.com/ValcineiJr`}>
                   <FaGithub />
                 </Link>
               </li>
               <li>
-                <Link href={`s`}>
+                <Link
+                  target="_blank"
+                  href={`https://www.linkedin.com/in/valcinei-junior-94aa16176/`}
+                >
                   <FaLinkedin />
                 </Link>
               </li>

@@ -6,6 +6,12 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
+  background: ${({ theme }) => theme.colors.background};
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
   header {
     background-color: ${({ theme }) => theme.colors.secondary};
 
@@ -19,6 +25,8 @@ export const Container = styled.div<ContainerProps>`
     .sub-menu {
       display: flex;
       flex-direction: column;
+
+      z-index: 19;
 
       background: white;
 
@@ -115,7 +123,7 @@ export const Container = styled.div<ContainerProps>`
           border-radius: 5px;
         }
 
-        button {
+        .search-button {
           position: absolute;
           top: 2px;
           right: 16px;
@@ -129,6 +137,8 @@ export const Container = styled.div<ContainerProps>`
           display: flex;
           align-items: center;
           justify-content: center;
+
+          color: ${({ theme }) => theme.colors.text_alternative};
         }
       }
     }
@@ -147,6 +157,8 @@ export const Container = styled.div<ContainerProps>`
       width: 100%;
       height: calc(100% - 160px);
 
+      z-index: 19;
+
       transition: all 0.6s;
 
       display: ${({ toggle }) => (!toggle ? `none` : `flex`)};
@@ -162,7 +174,7 @@ export const Container = styled.div<ContainerProps>`
 
     nav {
       display: flex;
-
+      z-index: 19;
       background: white;
 
       position: absolute;
@@ -230,7 +242,7 @@ export const Container = styled.div<ContainerProps>`
       }
     }
 
-    button.menu {
+    .menu {
       background-color: ${({ theme }) => theme.colors.primary};
 
       border: none;
@@ -247,8 +259,27 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
+  .wrapper {
+    width: 100%;
+    max-width: 1200px;
+
+    flex: 1 !important;
+
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
+  .container {
+    padding-top: 30px;
+  }
+
   footer {
     display: flex;
+    z-index: 9999;
+
+    width: 100%;
+
+    padding-top: 10px;
+    margin-top: 50px;
 
     border-top: 1px solid ${({ theme }) => theme.colors.text_secondary};
 

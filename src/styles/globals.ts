@@ -14,6 +14,64 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.site-button {
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+    font-family: 'Poppins';
+
+    margin: 0 auto;
+    padding: 16px;
+
+    font-size: 1.6rem;
+    color: ${({ theme }) => theme.colors.primary};
+
+    transition: all 0.6s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: transparent;
+}
+
+.loading{
+    fleX:1;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 300px;
+}
+
+.fluid-width {
+  width: 100%;
+}
+
+.site-button:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+
+    color: white;
+}
+
+.site-button-fill {
+
+
+        font-family: 'Poppins';
+
+        background: ${({ theme }) => theme.colors.primary};
+        color: white;
+        font-size: 1.6rem;
+
+        margin: 0 auto;
+        padding: 16px;
+
+        transition: all 0.6s;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 *:disabled {
       background-color: dimgrey !important;
       color: linen;
@@ -61,6 +119,8 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+
 //responsive
 @media (max-width: 500px) {
   html {

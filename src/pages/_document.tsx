@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-title-in-document-head */
 /* eslint-disable @next/next/google-font-display */
 import React from 'react';
 import Document, {
@@ -42,10 +43,11 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="pt">
-        <Head>
+        <Head title="Salão de Jogos">
           <meta charSet="utf-8" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <title>Salão de Jogos</title>
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap"
             rel="stylesheet"
